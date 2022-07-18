@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  </head>
+  <body>
+    
+    <center><h1>SHOW DATA</h1></center>
+    
+    <table class="table table-striped">
+        
+        <thead>
+            
+          <tr>
+            <th scope="col">S.NO.</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Contact</th>
+          </tr>
+        </thead>
+        <tbody>
+         {% if data %}
+          {% for data in data %}
+            <tr>
+              
+                <th scope="row">{{data.id}}</th>
+                <td>{{data.Firstname}}</td>
+                <td>{{data.Lastname}}</td>
+                <td>{{data.Email}}</td>
+                <td>{{data.Contact}}</td>
+                <td>
+                  <form action="{% url 'update' id=data.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="EDIT">
+                  </form>
+                </td>
+
+                <td>
+                  <form action="{% url 'delete' id=data.id %}" method="post" >
+                    {% csrf_token %}
+                    <input type="submit" value="DELETE">
+                  </form>
+                </td>
+                
+              </tr>
+           {% endfor %}
+                {% endif %}
+
+        </tbody>
+      </table>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>
